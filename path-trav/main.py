@@ -32,6 +32,7 @@ def index():
                 else:
                     files = [file for file in tgt.iterdir()]
             else:
+                print(tgt)
                 content = "Access denied."
 
         except FileNotFoundError:

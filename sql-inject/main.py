@@ -74,8 +74,7 @@ def index():
         query_term = request.form.get("q", "").strip()
         db = get_db()
         cur = db.cursor()
-        sql = f"SELECT name, category, price FROM products WHERE \
-              category LIKE '%{query_term}%'"
+        sql = f"SELECT name, category FROM products WHERE category LIKE '%{query_term}%'"
 
         try:
             cur.execute(sql)

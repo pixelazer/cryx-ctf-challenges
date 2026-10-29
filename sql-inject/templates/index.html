@@ -27,7 +27,11 @@
             <table>
                 <tr><th>Name</th><th>Category</th><th>Price</th></tr>
                 {% for sql_row in results %}
-                <tr><td>{{ sql_row[0] }}</td><td>{{ row[1] }}</td><td>{{ row[2] }}</td></tr>
+                <tr>
+                {% for item in sql_row %}
+                <td>{{ item }}</td>
+                {% endfor %}
+                </tr>
                 {% endfor %}
             </table>
         {% else %}

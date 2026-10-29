@@ -12,6 +12,11 @@
 </head>
 
 <body>
+    <nav class="site-nav">
+        <span class="brand">CRYX CTF</span>
+        <span class="crumb">SPHINX 2026 / Eosphoros</span>
+    </nav>
+
     <h1>Eosphoros</h1>
 
     <form method="POST" action="" class="hash_form">
@@ -20,17 +25,17 @@
     </form>
 
     <div class="result">
-    <h3>SHA-256 terminal output:</h3>
-    {% if content != "No file opened" %}
-        {% if content.stdout %}
-        <pre>{{ content.stdout }}</pre>
+        <h3>SHA-256 output:</h3>
+        {% if content != "No file opened" %}
+            {% if content.stdout %}
+            <pre>{{ content.stdout }}</pre>
+            {% endif %}
+            {% if content.stderr %}
+            <pre class="stderr">{{ content.stderr }}</pre>
+            {% endif %}
+        {% else %}
+            <p>No input submitted yet.</p>
         {% endif %}
-        {% if content.stderr %}
-        <pre class="stderr">{{ content.stderr }}</pre>
-        {% endif %}
-    {% else %}
-        <p>No input submitted yet.</p>
-    {% endif %}
     </div>
 </body>
 </html>
