@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- This file is part of a challenge for CRYX CTF [SPHINX 2026] -->
+<!-- Written by Aryan Takalkar -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Stilbon</title>
+</head>
+
+<body>
+    <h1>Stilbon</h1>
+    <!-- TODO: remove debug cache element before launch -->
+    <div
+        id="debug-cache" style="display:none"
+        data-last-accessed="YThmM2syeDlxN3B3">
+    </div>
+
+    <form method="POST" action="" class="id_form">
+        <h3> Enter the file ID you want to access: </h3>
+        <input type="text" name="file_id"><br>
+    </form>
+
+    <div class="message">
+        <p>{{ message }}</p>
+    </div>
+</body>
+</html>

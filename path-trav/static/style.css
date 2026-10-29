@@ -1,0 +1,143 @@
+:root {
+    --void: #0e0e14;
+    --panel: #16161f;
+    --border: #2a2a38;
+    --text: #d8dae2;
+    --muted: #8588a0;
+
+    --sun-blue: #3a7bd5;
+    --sun-cyan: #4fd3c4;
+    --sun-amber: #f2a13a;
+    --sun-rose: #e8456b;
+
+    --frost: #8fd8e8;   /* Leviathan axe */
+    --chaos: #b3261e;   /* Kratos / Blades of Chaos */
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    padding: 3rem 1.5rem 4rem;
+    color: var(--text);
+    font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background:
+        center / contain no-repeat radial-gradient(ellipse 100vh 100vh at 50% 15%, rgba(58, 123, 213, 0.08), transparent 70%),
+        var(--void);
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 180px;
+    background: linear-gradient(180deg, transparent, rgba(143, 216, 232, 0.05));
+    clip-path: polygon(0 100%, 0 60%, 15% 40%, 30% 70%, 45% 20%, 60% 55%, 75% 35%, 90% 65%, 100% 45%, 100% 100%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+h1 {
+    margin: 0 0 0.25rem;
+    font-size: 2.6rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: linear-gradient(
+        180deg,
+        var(--sun-blue) 0%,
+        var(--sun-cyan) 35%,
+        var(--sun-amber) 65%,
+        var(--sun-rose) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-align: center;
+}
+
+h1::after {
+    /* rune-style divider, a quiet GoW nod */
+    content: "ᚠ ᚨ ᛚ ᛚ ᛖ ᚾ   ᛊ ᛟ ᚾ";
+    display: block;
+    margin-top: 0.4rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    color: var(--frost);
+    opacity: 0.55;
+    text-transform: none;
+}
+
+h3 {
+    margin: 0 0 0.75rem;
+    font-size: 0.95rem;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+    text-transform: uppercase;
+}
+
+form.fileForm,
+.fileList,
+.content {
+    width: 100%;
+    max-width: 560px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.25rem 1.5rem;
+    margin-top: 1.25rem;
+}
+
+form.fileForm {
+    border-top: 2px solid var(--sun-amber);
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    background: var(--void);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text);
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: var(--frost);
+    box-shadow: 0 0 0 2px rgba(143, 216, 232, 0.15);
+}
+
+.fileList {
+    border-top: 2px solid var(--chaos);
+}
+
+.fileList p {
+    margin: 0.75rem 0 0.25rem;
+    color: var(--sun-rose);
+}
+
+.content {
+    border-top: 2px solid var(--frost);
+}
+
+.content pre {
+    background: var(--void);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1rem;
+    color: var(--text);
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.content p {
+    color: var(--muted);
+    font-style: italic;
+}

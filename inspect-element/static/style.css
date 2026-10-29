@@ -1,0 +1,125 @@
+:root {
+    --void: #0e0e14;
+    --panel: #16161f;
+    --border: #2a2a38;
+    --text: #d8dae2;
+    --muted: #8588a0;
+
+    --quicksilver: #aab2c0;
+    --chrome-light: #eef1f6;
+    --chrome-deep: #4b5363;
+    --hermes-gold: #c9a24a;  /* small, singular accent — Stilbon was the "shining" herald */
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    padding: 3rem 1.5rem 4rem;
+    background:
+        radial-gradient(ellipse 700px 420px at 50% 10%, rgba(170, 178, 192, 0.07), transparent 70%)
+        no-repeat,
+        var(--void);
+    color: var(--text);
+    font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    margin: 0 0 0.25rem;
+    font-size: 2.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: linear-gradient(
+        100deg,
+        var(--chrome-deep) 0%,
+        var(--quicksilver) 25%,
+        var(--chrome-light) 50%,
+        var(--quicksilver) 75%,
+        var(--chrome-deep) 100%
+    );
+    background-repeat: repeat-x;
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-align: center;
+    animation: shimmer 6s linear infinite;
+}
+
+@keyframes shimmer {
+    0%   { background-position: -150% 50%; }
+    50%  { background-position: 50% 50%; }
+    100% { background-position: 150% 50%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    h1 { animation: none; }
+}
+
+h1::after {
+    /* rune-style divider — reads "swift" in Elder Futhark */
+    content: "ᛋ ᚹ ᛁ ᚠ ᛏ";
+    display: block;
+    margin-top: 0.4rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    color: var(--hermes-gold);
+    opacity: 0.5;
+    text-transform: none;
+}
+
+h3 {
+    margin: 0 0 0.75rem;
+    font-size: 0.95rem;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+    text-transform: uppercase;
+}
+
+form.id_form,
+.message {
+    width: 100%;
+    max-width: 560px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.25rem 1.5rem;
+    margin-top: 1.25rem;
+}
+
+form.id_form {
+    border-top: 2px solid var(--quicksilver);
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    background: var(--void);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text);
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: var(--chrome-light);
+    box-shadow: 0 0 0 2px rgba(238, 241, 246, 0.12);
+}
+
+.message {
+    border-top: 2px solid var(--hermes-gold);
+}
+
+.message p {
+    margin: 0;
+    color: var(--muted);
+}
+
+.message p:not(:empty) {
+    color: var(--text);
+}

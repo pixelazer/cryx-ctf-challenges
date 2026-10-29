@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- This file is part of a challenge for CRYX CTF [SPHINX 2026] -->
+<!-- Written by Aryan Takalkar -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <title>Phaethon</title>
+</head>
+
+<h1>Phaethon</h1>
+
+<body>
+    <!-- You will not find what you seek here. -->
+    <form method="POST" action="" class="fileForm">
+        <!-- User info is stored in ~/secrets/secrets.txt -->
+        <h3> Enter the file path you want to access: </h3>
+        <input type="text" name="file_id"><br>
+    </form>
+
+    <div class="fileList">
+        <h3>File list:</h3>
+        {% if files %}
+            {% for file in files %}
+                {% if not file.is_file() %}
+                    <p><b>{{ file.name }}</b></p>
+                    {% for _ in file.iterdir() %}
+                        ...{{ _.name }}<br>
+                    {% endfor %}
+                {% elif file.is_file() %}
+                {{ file.name }}<br>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <div class="content">
+        <h3>Search Result:</h3>
+        {% if content %}
+        <pre>{{ content }}</pre>
+        {% else %}
+        <p>File not selected, or not found.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

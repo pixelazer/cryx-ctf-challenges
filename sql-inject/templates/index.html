@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- This file is part of a challenge for CRYX CTF [SPHINX 2026] -->
+<!-- Written by Aryan Takalkar -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pyroeis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <h1>Pyroeis</h1>
+
+    <form method="POST" action="" class="search_form">
+        <h3>Search the catalog:</h3>
+        <input type="text" name="q" placeholder="e.g. GPU"><br>
+    </form>
+
+    <div class="results">
+        <h3>Results:</h3>
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% elif results %}
+            <table>
+                <tr><th>Name</th><th>Category</th><th>Price</th></tr>
+                {% for row in results %}
+                <tr><td>{{ row[0] }}</td><td>{{ row[1] }}</td><td>{{ row[2] }}</td></tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <p>No products found.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
