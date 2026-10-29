@@ -1,6 +1,6 @@
 Keys:
-    Stilbon     MIGeMA0GCSqGSIb3DQEBAQUAA4GMADCB    Hermes
-    Eosphoros   iAKBgHIg3ViBqdLKAx1f8w5M6PRo2Rvj    Venus
-    Pyroeis     MiZu1wd4pDtMjovJ2Iq3Rkj9V8oijjhD    Mars
-    Phaethon    hwqoixDhi2TzHELASfn6KBr7JpACWRyz    Jupiter
-    Phainon     V8LAHEoiKBACJpr7Sfq32In6Z8Zuv7Mi    Saturn
+    Stilbon     MIGeMA0GCSqGSIb3DQEBAQUAA4GMADCB    Hermes  Inspect Element
+    Eosphoros   iAKBgHIg3ViBqdLKAx1f8w5M6PRo2Rvj    Venus   RCE
+    Pyroeis     MiZu1wd4pDtMjovJ2Iq3Rkj9V8oijjhD    Mars    SQL Injection
+    Phaethon    hwqoixDhi2TzHELASfn6KBr7JpACWRyz    Jupiter Path Traversal
+    Phainon     V8LAHEoiKBACJpr7Sfq32In6Z8Zuv7Mi    Saturn  

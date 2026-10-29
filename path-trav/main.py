@@ -6,8 +6,8 @@ Written by Aryan Takalkar.
 from flask import Flask, request, render_template
 from pathlib import Path
 
-STATICS = Path("./static/").resolve()
-curdir = ''
+HOME_DIR = Path(__file__).resolve().parent
+STATICS = HOME_DIR / "static"
 app = Flask(__name__)
 
 @app.route("/", methods=["GET", "POST"])
