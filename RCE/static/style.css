@@ -1,0 +1,116 @@
+:root {
+    --void: #0e0e14;
+    --panel: #16161f;
+    --border: #2a2a38;
+    --text: #d8dae2;
+    --muted: #8588a0;
+
+    --indigo: #2e2a5c;
+    --violet: #6b5b95;
+    --dawn-gold: #e8c07d;
+    --venus: #f4ecd8;  /* single bright accent — the star itself */
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    padding: 3rem 1.5rem 4rem;
+    background:
+        radial-gradient(ellipse 600px 350px at 50% 85%, rgba(232, 192, 125, 0.06), transparent 70%)
+        no-repeat,
+        var(--void);
+    color: var(--text);
+    font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    margin: 0 0 0.25rem;
+    font-size: 2.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: linear-gradient(100deg, var(--indigo) 0%, var(--violet) 45%, var(--dawn-gold) 80%, var(--venus) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-align: center;
+}
+
+h1::after {
+    /* rune-style divider — "dawn" */
+    content: "ᛞᚨᚹᚾ";
+    display: block;
+    margin-top: 0.4rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    color: var(--venus);
+    opacity: 0.45;
+}
+
+h3 {
+    margin: 0 0 0.75rem;
+    font-size: 0.95rem;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+    text-transform: uppercase;
+}
+
+form.hash_form,
+.result {
+    width: 100%;
+    max-width: 560px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.25rem 1.5rem;
+    margin-top: 1.25rem;
+}
+
+form.hash_form {
+    border-top: 2px solid var(--violet);
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    background: var(--void);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text);
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: var(--dawn-gold);
+    box-shadow: 0 0 0 2px rgba(232, 192, 125, 0.15);
+}
+
+.result {
+    border-top: 2px solid var(--venus);
+}
+
+.result pre {
+    background: var(--void);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1rem;
+    color: var(--text);
+    font-size: 0.9rem;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.result pre.stderr {
+    border-color: var(--dawn-gold);
+    color: var(--dawn-gold);
+}
+
+.result p {
+    color: var(--muted);
+    font-style: italic;
+}

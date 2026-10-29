@@ -15,26 +15,31 @@ def index():
     content="No file opened"
 
     if request.method == "POST":
-        file_id = request.form.get("file_id", "").strip()
+        arg = request.form.get("input_text", "").strip()
+
+        if arg == "": return(render_template("index.html", content=content))
 
         if current_os == "Linux" or current_os == "Darwin":
-            content = runProcess(
-                f"cat ./static/{file_id}",
-                shell = True,
-                capture_output = True,
-                text = True
-            )
+            command = f"echo -n \"{arg}\" | sha256sum"
 
         elif current_os == "Windows":
+            command = f"echo {arg} | certutil -hashfile - SHA256"
+
+        try:
             content = runProcess(
-                f"type \"./static/{file_id}\"",
+                command,
                 shell = True,
                 capture_output = True,
-                text = True
+                text = True,
+                timeout = 5
             )
+        except TimeoutError:
+            content = "Request timed out."
 
-    return(render_template("index.html", content=content.stdout))
+
+    return(render_template("index.html", content=content))
 
 
 if __name__ == "__main__":
+
     app.run(host="0.0.0.0", port=5000)
