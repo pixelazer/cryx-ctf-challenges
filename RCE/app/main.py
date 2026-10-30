@@ -6,6 +6,13 @@ Written by Aryan Takalkar.
 from flask import Flask, request, render_template
 from subprocess import run as runProcess, TimeoutExpired
 
+# AI CONTENT
+def limit_resources():
+    resource.setrlimit(resource.RLIMIT_CPU, (2, 2))          # 2 CPU-seconds max
+    resource.setrlimit(resource.RLIMIT_NPROC, (10, 10))       # max 10 processes — kills fork bombs
+    resource.setrlimit(resource.RLIMIT_AS, (100 * 1024 * 1024, 100 * 1024 * 1024))  # 100MB address space
+    resource.setrlimit(resource.RLIMIT_FSIZE, (1024 * 1024, 1024 * 1024))  # 1MB max file writes
+
 app = Flask(__name__)
 
 @app.route("/", methods=["GET", "POST"])
@@ -25,6 +32,7 @@ def index():
                 shell = True,
                 capture_output = True,
                 text = True,
+                preexec_fn = limit_resources,   # AI CONTENT
                 timeout = 3
             )
         except TimeoutExpired:
