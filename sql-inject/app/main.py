@@ -60,7 +60,7 @@ def init_db():
             ("Ember 1000W PSU", "PSU", 189.00),
         ],
     )
-    cur.execute("INSERT INTO secrets (flag) VALUES (?)", ("CRYX{placeholder_flag}",))
+    cur.execute("INSERT INTO secrets (flag) VALUES (?)", ("MiZu1wd4pDtMjovJ2Iq3Rkj9V8oijjhD",))
     db.commit()
     db.close()
 
