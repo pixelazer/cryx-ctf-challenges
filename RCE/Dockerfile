@@ -15,4 +15,4 @@ RUN useradd -m appuser
 USER appuser
 
 EXPOSE 10000
-CMD ["sh", "-c", "gunicorn --bind 0.0.0.0:$PORT --workers 50 --timeout 10 --max-requests 100 --max-requests-jitter 10 main:app"]
+CMD ["sh", "-c", "gunicorn --bind 0.0.0.0:$PORT main:app"]
