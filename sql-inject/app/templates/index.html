@@ -24,6 +24,8 @@
         {% if error %}
             <p class="error">{{ error }}</p>
         {% elif results %}
+        <!-- Note to frontend: SQL table uses SELECT name, category [...] LIKE '%{query_term}%' -->
+        <!-- expect 2 rows -->
             <table>
                 <tr><th>Name</th><th>Category</th><th>Price</th></tr>
                 {% for sql_row in results %}

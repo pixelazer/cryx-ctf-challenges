@@ -4,7 +4,7 @@ Written by Aryan Takalkar.
 '''
 
 from flask import Flask, request, render_template
-from subprocess import run as runProcess
+from subprocess import run as runProcess, TimeoutExpired
 from platform import system
 
 app = Flask(__name__)
@@ -12,7 +12,7 @@ app = Flask(__name__)
 @app.route("/", methods=["GET", "POST"])
 def index():
     current_os = system()
-    content="No file opened"
+    content="Enter text..."
 
     if request.method == "POST":
         arg = request.form.get("input_text", "").strip()
@@ -33,7 +33,7 @@ def index():
                 text = True,
                 timeout = 5
             )
-        except TimeoutError:
+        except TimeoutExpired:
             content = "Request timed out."
 
 
@@ -41,5 +41,4 @@ def index():
 
 
 if __name__ == "__main__":
-
     app.run(host="0.0.0.0", port=5000)

@@ -1,0 +1,4 @@
+Flask
+gunicorn
+pathlib
+sqlite3
