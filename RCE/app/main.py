@@ -5,13 +5,11 @@ Written by Aryan Takalkar.
 
 from flask import Flask, request, render_template
 from subprocess import run as runProcess, TimeoutExpired
-from platform import system
 
 app = Flask(__name__)
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    current_os = system()
     content="Enter text..."
 
     if request.method == "POST":
@@ -19,11 +17,7 @@ def index():
 
         if arg == "": return(render_template("index.html", content=content))
 
-        if current_os == "Linux" or current_os == "Darwin":
-            command = f"echo -n \"{arg}\" | sha256sum"
-
-        elif current_os == "Windows":
-            command = f"echo {arg} | certutil -hashfile - SHA256"
+        command = f"echo -n {arg} | sha256sum"
 
         try:
             content = runProcess(
@@ -31,7 +25,7 @@ def index():
                 shell = True,
                 capture_output = True,
                 text = True,
-                timeout = 5
+                timeout = 3
             )
         except TimeoutExpired:
             content = "Request timed out."
