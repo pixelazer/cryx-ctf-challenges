@@ -4,3 +4,82 @@ Keys:
     Pyroeis     MiZu1wd4pDtMjovJ2Iq3Rkj9V8oijjhD    SQL Injection
     Phaethon    hwqoixDhi2TzHELASfn6KBr7JpACWRyz    Path Traversal
     Phainon     V8LAHEoiKBACJpr7Sfq32In6Z8Zuv7Mi    robots.txt
+
+
+Guides for...
+(written by A.S.T.)
+Stilbon:
+    Stilbon is an exceedingly simple puzzle. We must enter a file ID to view its contents.
+    However, path traversal tricks will not work here. What can we do?
+
+    Checking the page's source in the browser reveals the answer:
+
+        data-last-accessed="YThmM2syeDlxN3B3">
+
+    It appears the admin has forgotten to erase some important data.
+    Paste this into the "File ID" field and you will see the flag.
+
+Phaethon:
+    Phaethon appears similar to Stilbon at first glance. However, it has one important difference.
+    It asks the user for a file "path", not a file "ID". Therefore, it may be able to actually
+    traverse the file tree. Let's test this.
+
+    Input "../" into the form and you'll see a beautiful sight. "secrets.txt", visible right away.
+    Navigate to it and you can swipe the flag right away, paired with "Phaethon".
+
+Pyroeis:
+    Let's take a look at the homepage. The only text visible to us is the "Search the Catalog" form and a "Results" field.
+    Enter "GPU" and you are treated with multiple options to gaze at.
+    You must be thinking - where does the site get this data? Is there any way I can interfere?
+    Like many other web apps, Pyroeis uses SQL to store its data.
+    In fact, here's the exact command:
+
+        sql = f"SELECT name, category FROM products WHERE category LIKE '%{query_term}%'"
+
+    Part of this command is exposed in the website's HTML page.
+    Note that the user's input, query_term, is inserted right in with no sanitation or checking whatsoever.
+    This leaves the site vulnerable to SQL Injection attacks. We can slide in a malicious input to run our own command.
+
+    First, let's get the structure of the database. The SQLite command to do this is
+
+        SELECT sql, name FROM sqlite_master
+
+    but if you run this, it will not work. This is because of the syntax of the command being run by the application.
+    The user's input is wrapped in inverted commas and surrounded by % symbols. Therefore, we need to get rid of them before
+    our query will run error-free.
+
+    Firstly, the app is already running a query of its own, so we must add our query on instead of blindly trying to
+    overpower it. For this, we use the UNION keyword.
+
+    To get rid of the preceding quote - the opening ' symbol - we can close it before typing our own command, like so:
+
+        ' UNION SELECT <...>
+
+    To get rid of the %' that follows our query, we can declare it a comment, by using two dashes. Therefore, the complete
+    command becomes
+
+        ' UNION SELECT sql, name FROM sqlite_master --
+
+    Once we have discovered the existence of the "secrets" table and noted its structure, we can retrieve the flag simply
+    using
+
+        ' UNION SELECT * FROM secrets
+
+
+Eosphoros:
+    This one is tough. All we know is that it somehow calculates a SHA-256 hash from the given input text.
+    Type any text and you'll get a wad of characters. How do we find the flag?
+
+    The site doesn't seem to be using SQL, or dealing with file paths... but is it really generating those
+    hashes by itself?
+    No! It isn't! It's actually reliant on a common Linux utility, passing your input as an argument to a
+    terminal command. Try the following:
+
+        ; ls #
+
+    and you will be treated to a show of the entire application's file structure.
+    The semicolon terminates the previous command, and the # marks everything after
+    your input as a comment.
+
+    Having observed the file structure and hopefully having searched inside the ./static/ folder,
+    you can "cat ./static/secret.txt/" and grab the flag.
