@@ -60,7 +60,7 @@ def init_db():
             ("Ember 1000W PSU", "PSU", 189.00),
         ],
     )
-    cur.execute("INSERT INTO secrets (flag) VALUES (?)", ("MiZu1wd4pDtMjovJ2Iq3Rkj9V8oijjhD",))
+    cur.execute("INSERT INTO secrets (flag) VALUES (?)", ("CRYX{MiZu1wd4pDtMjovJ2Iq3Rkj9V8oijjhD}",))
     db.commit()
     db.close()
 
@@ -69,6 +69,9 @@ def init_db():
 def index():
     results = []
     error = None
+
+    if not DB_PATH.exists():
+        init_db()
 
     if request.method == "POST":
         query_term = request.form.get("q", "").strip()

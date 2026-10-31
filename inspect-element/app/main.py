@@ -16,7 +16,7 @@ FILES = {
     "backup-2026-10-25.zip": "Backup created successfully. No errors reported.",
     "public-notes": "Remember to remove temporary files before deployment.",
     "": "",
-    "YThmM2syeDlxN3B3": "real_flag"
+    "YThmM2syeDlxN3B3": "CRYX{MIGeMA0GCSqGSIb3DQEBAQUAA4GMADCB}"
 }
 
 

@@ -7,7 +7,7 @@ Keys:
 
 
 Guides for...
-(written by A.S.T.)
+
 Stilbon:
     Stilbon is an exceedingly simple puzzle. We must enter a file ID to view its contents.
     However, path traversal tricks will not work here. What can we do?
