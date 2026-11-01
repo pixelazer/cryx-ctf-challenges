@@ -3,8 +3,8 @@ This file is part of a challenge for CRYX CTF [SPHINX 2026]
 Written by Aryan Takalkar.
 '''
 
-from flask import Flask, request, render_template
 from subprocess import run as runProcess, TimeoutExpired
+from flask import Flask, request, render_template
 
 app = Flask(__name__)
 
@@ -15,7 +15,7 @@ def index():
     if request.method == "POST":
         arg = request.form.get("input_text", "").strip()
 
-        if arg == "": return(render_template("index.html", content=content))
+        if arg == "": return render_template("index.html", content=content)
 
         command = f"echo -n {arg} | sha256sum"
 
@@ -25,7 +25,8 @@ def index():
                 shell = True,
                 capture_output = True,
                 text = True,
-                # preexec_fn = limit_resources,   # crashes the app if used
+                # crashes the app if used + limit_resources has been deleted
+                # preexec_fn = limit_resources,
                 timeout = 3
             )
         except TimeoutExpired:
@@ -34,7 +35,7 @@ def index():
             content = "Request failed to execute."
 
 
-    return(render_template("index.html", content=content))
+    return render_template("index.html", content=content)
 
 
 if __name__ == "__main__":

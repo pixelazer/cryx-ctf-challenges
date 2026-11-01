@@ -13,6 +13,8 @@ DB_PATH = HOME_DIR / "dbs" / "database.db"
 
 
 def get_db():
+    '''Open and return a dB connection.'''
+
     db = getattr(g, "_database", None)
     if db is None:
         db = g._database = sqlite3.connect(DB_PATH)
@@ -21,12 +23,16 @@ def get_db():
 
 @app.teardown_appcontext
 def close_db(exception):
+    '''Close the dB connection when the app shuts down.'''
+
     db = getattr(g, "_database", None)
     if db is not None:
         db.close()
 
 
 def init_db():
+    '''Re-initialize the dB from scratch.'''
+
     db = sqlite3.connect(DB_PATH)
     cur = db.cursor()
     cur.executescript("""
@@ -45,6 +51,7 @@ def init_db():
             flag TEXT
         );
     """)
+
     cur.executemany(
         "INSERT INTO products (name, category, price) VALUES (?, ?, ?)",
         [
@@ -60,7 +67,8 @@ def init_db():
             ("Ember 1000W PSU", "PSU", 189.00),
         ],
     )
-    cur.execute("INSERT INTO secrets (flag) VALUES (?)", ("CRYX{MiZu1wd4pDtMjovJ2Iq3Rkj9V8oijjhD}",))
+    cur.execute("INSERT INTO secrets (flag) VALUES (?)",
+                ("CRYX{MiZu1wd4pDtMjovJ2Iq3Rkj9V8oijjhD}",))
     db.commit()
     db.close()
 
@@ -89,6 +97,5 @@ def index():
 
 
 if __name__ == "__main__":
-    if not DB_PATH.exists():
-        init_db()
+    init_db()
     app.run(host="0.0.0.0", port=5000)
